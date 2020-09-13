@@ -8,9 +8,6 @@
             <div class="col">
             <h2>Ver Etiqueta<h2>
             </div>
-            <div class="col">
-            <a class="btn btn-primary float-right" href="{{ route('tags.create')}}" role="button">Crear</a>
-            </div>
         </div>
     </div>
     <div class="card-body">

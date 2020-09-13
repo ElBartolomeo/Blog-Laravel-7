@@ -34,7 +34,7 @@
                     <a class="btn btn-outline-dark float-right" href="{{ route('tags.edit', $tag->id)}}" role="button">Editar</a>
                 </td>
                 <td width="10px">
-                    <form action="{{ route('tags.destroy', $tag->id) }} " method="POST">
+                    <form method="POST" action="{{ route('tags.destroy', $tag->id) }}">
                         @method('DELETE')
                         @csrf
                         <input type="submit" value="Eliminar" class="btn btn-danger">

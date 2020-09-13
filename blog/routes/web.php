@@ -26,6 +26,3 @@ Route::get('etiqueta/{slug}', 'Web\PageController@tag')->name('tag');
 Route::resource('tags',         'Admin\TagController');
 Route::resource('categories',   'Admin\CategoryController');
 Route::resource('posts',        'Admin\PostController');
-
-Route::post('tagnew', 'Admin\TagController@store')->name('tag.store');
-Route::patch('tagchange/', 'Admin\TagController@update')->name('tag.update');

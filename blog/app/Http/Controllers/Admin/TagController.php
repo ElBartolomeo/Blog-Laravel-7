@@ -36,7 +36,9 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        return view('admin.tags.create',[
+                'tag'=> new tag // se envia un proyecto vacio {{ old('xxxx', null)}} = {{ old('xxxx')}}, esta linea es para hacer identicos los formularios y poder reutizar uno para guardar y editar.
+        ]);
     }
 
     /**
@@ -93,16 +95,16 @@ class TagController extends Controller
      */
     public function update(TagUpdateRequest $request, $id)
    
-    {  
-        dd($request->all());
+    {  /*
+        dd();*/
 
-        /*$tag = Tag::find($id);
+        $tag = Tag::find($id);
         
         $tag->fill($request->all())->save();
 
         return redirect()->route('tags.edit', $tag->id)
         ->with('info','Etiqueta actualizada con éxito');
-        */
+        
     }
 
     /**
