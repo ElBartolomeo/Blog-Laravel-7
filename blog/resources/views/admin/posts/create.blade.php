@@ -6,7 +6,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col">
-            <h2>Crear Categoría<h2>
+            <h2>Crear Una Entrada<h2>
             </div>
         </div>
     </div>

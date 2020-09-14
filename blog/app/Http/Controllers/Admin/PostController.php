@@ -27,7 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id','DESC')
-        ->where('user_id', auth()->user()->id)
+        ->where('user_id', auth()->user()->id) // Permite mostrar los post que le pertenecen a cada usuario y verlo desde el index que los muestra.
         
         ->paginate();
         //dd($posts);
@@ -41,8 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('name','ASC')->pluck('name','id');
-        $tags = Tag::orderBy('name','ASC')->get();
+        $categories = Category::orderBy('name','ASC')->pluck('name','id'); //Se envia el listado de categorias de forma alfabetica, con solo nombre y id
+        $tags       = Tag::orderBy('name','ASC')->get();                   //Se envia el listado de etiquetas de forma alfabetica para ser vista en un check box
 
         return view('admin.posts.create',[
                 'post'=> new post // se envia un proyecto vacio {{ old('xxxx', null)}} = {{ old('xxxx')}}, esta linea es para hacer identicos los formularios y poder reutizar uno para guardar y editar.
@@ -88,8 +88,8 @@ class PostController extends Controller
     {
          /*dd($id); - Ver en pantalla información que ha encontrado*/
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
-        $tags = Tag::orderBy('name','ASC')->get();
-        $post = Post::find($id);
+        $tags       = Tag::orderBy('name','ASC')->get();
+        $post       = Post::find($id);
        /* dd($post); */
          return view('admin.posts.edit', compact('post','categories','tags'));
         
