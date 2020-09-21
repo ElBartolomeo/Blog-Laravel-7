@@ -76,4 +76,4 @@
                     $("#name").stringToSlug();
                 });
             </script>
-            @endsection 
+            @endsection

@@ -44,7 +44,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name','ASC')->pluck('name','id'); //Se envia el listado de categorias de forma alfabetica, con solo nombre y id
-        $tags       = Tag::orderBy('name','ASC')->get();                   //Se envia el listado de etiquetas de forma alfabetica para ser vista en un check box
+        $tags       = Tag::orderBy('name','ASC')->get();                   //Se envia el listado de etiquetas de forma alfabetica para ser usada en un check box
 
         return view('admin.posts.create',[
                 'post'=> new post // se envia un proyecto vacio {{ old('xxxx', null)}} = {{ old('xxxx')}}, esta linea es para hacer identicos los formularios y poder reutizar uno para guardar y editar.
@@ -64,7 +64,6 @@ class PostController extends Controller
 
         //Salva los datos
         $post = Post::create($request->all());//Acepta datos masivos, pero en post hay control de los campos que se necesitan
-        //Guarda los tag que entran en un array
         $post->tags()->attach($request->get('tags')); 
         return redirect()->route('posts.edit', $post->id)->with('info','Entrada Creada con éxito');
         /**
@@ -99,10 +98,9 @@ class PostController extends Controller
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
         $tags       = Tag::orderBy('name','ASC')->get();
         $post       = Post::find($id);
-    
+        
         return view('admin.posts.edit', compact('post','categories','tags'));
         
-       
     }
 
     /**
