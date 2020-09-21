@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Blog Laravel 7</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-post.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">ElBarto  </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Inicio
+              <span class="sr-only">(current)
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Elbarto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contenido</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#tres">3 - Configurar base de datos, slug y migraciones</a>
+                  </li>
+                  <li>
+                    <a href="#cuatro">4 - Relacionando tablas y continuando migraciones</a>
+                  </li>
+                  <li>
+                    <a href="#cinco">5 - Factory, Seeder, Faker</a>
+                  </li>
+                  <li>
+                    <a href="#seis">6 - Listado de POST - Paginate, AUTH</a>
+                  </li>
+                  <li>
+                    <a href="#siete">7 - Detalle de un POST</a>
+                  </li>
+                  <li>
+                    <a href="#ocho">8 - ORM Eloquent (Consulta de POST por Categoría y Etiquetas)</a>
+                  </li>
+                  <li>
+                    <a href="#nueve">9 - Estructura de Panel administrativo</a>
+                  </li>
+                  <li>
+                    <a href="#diez">10 - AUTH y TagController (index, show, create, store, edit, update y destroy)</a>
+                  </li>
+                 <li>
+                    <a href="#once">11 - Validar campos obligatorios y únicos en Laravel (make:request)</a>
+                  </li>
+                  <li>
+                    <a href="#doce">12 - Vista Index (ver, editar, eliminar y crear)</a>
+                  </li> 
+                  <li>
+                    <a href="#trece">13 - Eliminar etiquetas</a>
+                  </li>
+                  <li>
+                    <a href="#catorce">14 - Vistas de create, edit, show para el módulo tags</a>
+                  </li>
+                  <li>
+                    <a href="#quince">15 - Javascript en algunas vistas blade</a>
+                  </li>
+                  <li>
+                    <a href="#dieciseis">16 - Módulo categorías (CRUD)</a>
+                  </li>
+                  <li>
+                    <a href="#diecisiete">17 - Módulo de Entradas (CRUD de POSTS)</a>
+                  </li>    
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-12">
+
+        <!-- Title -->
+        <h1 class="mt-4">Creando un Blog Usando Laravel 7</h1>
+
+        <!-- Author -->
+        <p class="lead">
+          Por ElBarto Lomeo
+          
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Fecha de inicio: Septiembre 7, 2020</p>
+        <p>Fecha final: Ni idea. </p>
+
+        <hr>
+
+        <!-- Post Content -->
+
+
+        <p>La información presente es este sitio tiene como fin de documentar mi primera practica usando Laravel, no soy un programador, tampoco estudio maquetación web y esto no es una guía para crear un blog, solo recopilo los pasos que he hecho y adjunto documentación que he encontrado en otros sitios.</p>
+        <p>Este pequeño blog está creado en base a los videotutoriales del curso Blog en LARAVEL 5.5 del canal de YouTube  Rimorsoft Online, también puse en práctica cosas que vi en el curso Aprende Laravel desde cero (2019) del canal de YouTube  Aprendible y el manejo de Bootstrap gracias a una gran cantidad de videos del canal de YouTube  Fazt, también me han ayudado mucho personas dentro del servidor de discord de FaztTech al momento de responder mis dudas. 
+        </p>
+        <hr>
+        <p>Programas Instalados</p>
+        <p>
+        <img width=589 height=214 id="Imagen 1"
+        src="Blog_archivos/image001.jpg"></p>
+
+        <p>Se escribe en composer: create-project --prefer-dist laravel/laravel blog</p>
+
+        <p>
+        <img width=589 height=130 id="Imagen 2"
+        src="Blog_archivos/image002.jpg"></p>
+
+        <p>
+        <img width=589 height=380 id="Imagen 3"
+        src="Blog_archivos/image003.jpg"></p>
+
+        
+        <p style='text-align:justify'><img width=589 height=436
+        id="Imagen 4" src="Blog_archivos/image004.jpg"></p>
+
+
+        <p ><a href="http://localhost/blog/public/">http://localhost/blog/public/</a></p>
+
+       
+        <p>
+        Creando modelos para categorías, post y etiquetas </p>
+
+        <p>
+        <img border=0 width=586 height=278 id="Imagen 6"
+        src="Blog_archivos/image005.jpg"></p>
+
+        <p>
+        <img border=0 width=514 height=207 id="Imagen 7"
+        src="Blog_archivos/image006.png"></p>
+
+        <p>php artisan make:model Category -m</p>
+
+        <p>model Post -m</p>
+
+        <p>php artisan make:model Tag -m</p>
+
+        <p><b>Creación modelo para relación muchos a muchos </b></p>
+
+        <p>php artisan make:migration create_post_tag_tablet
+        (Tener presente ordenarlo
+        alfabéticamente)</p>
+
+        <p><img border=0 width=589 height=120 id="Imagen 8"
+        src="Blog_archivos/image007.jpg"></p>
+
+        
+        <h3><a name="tres"></a>3. Configurar base de datos, slug y migraciones</h3>
+            
+        <p>
+        <img border=0 width=590 height=333 id="Imagen 9"
+        src="Blog_archivos/image008.jpg"></p>
+
+        <p><img border=0 width=589 height=251
+        id="Imagen 10" src="Blog_archivos/image009.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=251 id="Imagen 11"
+        src="Blog_archivos/image010.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=251 id="Imagen 12"
+        src="Blog_archivos/image011.jpg"></p>
+
+        <p>php artisan migrate</p>
+
+        <p><img border=0 width=464 height=213
+        id="Imagen 13" src="Blog_archivos/image012.jpg"></p>
+
+        <p>
+        <img border=0 width=590 height=297 id="Imagen 14"
+        src="Blog_archivos/image013.jpg"></p>
+
+        <p>
+        <img border=0 width=590 height=297 id="Imagen 15"
+        src="Blog_archivos/image014.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=227 id="Imagen 16"
+        src="Blog_archivos/image015.jpg"></p>
+
+        <p>php artisan migrate:refresh</p>
+
+        <p><img border=0 width=585 height=471
+        id="Imagen 17" src="Blog_archivos/image016.jpg"></p>
+
+        <p>
+        <img border=0 width=590 height=297 id="Imagen 18"
+        src="Blog_archivos/image017.jpg"></p>
+
+
+       <h3><a name="cuatro"></a>4 - Relacionando tablas y continuando migraciones</h3>
+
+        <p>
+        &nbsp;</p>
+
+        <p><a href="https://desarrollowebtutorial.com/phpmyadmin-activar-vista-disenador/#:~:text=phpMyAdmin%20activar%20vista%20dise%C3%B1ador&amp;text=phpMyAdmin%20por%20defecto%20no%20esta,modificamos%20quedando%20de%20esta%20manera%3A&amp;text=Luego%20importamos%20el%20archivo%20create_tables."><img border=0 width=589 height=479
+        id="Imagen 5" src="Blog_archivos/image018.jpg"></a></p>
+
+        <pre><code>
+        /* Storage database and tables */
+        $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
+        $cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';
+        $cfg['Servers'][$i]['relation'] = 'pma__relation';
+        $cfg['Servers'][$i]['table_info'] = 'pma__table_info';
+        $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
+        $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
+        $cfg['Servers'][$i]['column_info'] = 'pma__column_info';
+        $cfg['Servers'][$i]['history'] = 'pma__history';
+        $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
+        $cfg['Servers'][$i]['tracking'] = 'pma__tracking';
+        $cfg['Servers'][$i]['designer_coords'] = 'pma__designer_coords';
+        $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';
+        $cfg['Servers'][$i]['recent'] = 'pma__recent';
+        
+        </code></pre>
+        <p> <img border=0 width=589 height=212 id="Imagen 19"
+        src="Blog_archivos/image019.jpg"></p>
+
+        <p><img border=0 width=540 height=391
+        id="Imagen 22" src="Blog_archivos/image020.jpg"></p>
+
+        <p><img border=0 width=394 height=333
+        id="Imagen 23" src="Blog_archivos/image021.jpg"></p>
+
+        <p><img border=0 width=508 height=448
+        id="Imagen 24" src="Blog_archivos/image022.jpg"></p>
+
+
+        <p><img border=0 width=466 height=364
+        id="Imagen 25" src="Blog_archivos/image023.jpg"></p>
+
+        <p>
+        <img border=0 width=756 height=527 id="Imagen 20"
+        src="Blog_archivos/image024.jpg"></p>
+
+        <h3><a name="cinco"></a>5 - Factory, Seeder, Faker</h3>
+
+        <p>
+        Creando información falsa</p>
+
+        <p>
+        Los Factory van con nombre singular, representa la
+        estructura de una tabla</p>
+
+        <p><img border=0 width=520 height=148
+        id="Imagen 21" src="Blog_archivos/image025.png"</p>
+
+        <p>php artisan make:factory CategoryFactory</p>
+
+        <p>php artisan make:factory PostFactory</p>
+
+        <p>php artisan make:factory TagFactory</p>
+
+        <p><img border=0 width=488 height=222
+        id="Imagen 26" src="Blog_archivos/image026.png"></p>
+
+        <p>
+        Los Seeds van con nombre en plural, ayuda a llenar con
+        información falsa-</p>
+
+        <p><img border=0 width=589 height=281
+        id="Imagen 27" src="Blog_archivos/image027.jpg"></p>
+
+        <p>php artisan make:seeder CategoriesTableSeeder</p>
+
+        <p>php artisan make:seeder PostsTableSeeder</p>
+
+        <p>php artisan make:seeder TagsTableSeeder</p>
+
+        <p>php artisan make:seeder UsersTableSeeder</p>
+
+
+        <p><img border=0 width=589 height=310
+        id="Imagen 28" src="Blog_archivos/image028.jpg"></p>
+
+
+        <p><img border=0 width=589 height=405
+        id="Imagen 29" src="Blog_archivos/image029.jpg"></p>
+
+        <p><img border=0 width=585 height=317
+        id="Imagen 30" src="Blog_archivos/image030.jpg"></p>
+
+
+        <p><img border=0 width=586 height=394
+        id="Imagen 31" src="Blog_archivos/image031.jpg"></p>
+
+        <p><img border=0 width=589 height=408
+        id="Imagen 32" src="Blog_archivos/image032.png"></p>
+
+
+        <p><img border=0 width=591 height=397
+        id="Imagen 34" src="Blog_archivos/image033.jpg"></p>
+
+        <p><img border=0 width=590 height=454
+        id="Imagen 36" src="Blog_archivos/image034.png"></p>
+
+
+        <p><img border=0 width=590 height=492
+        id="Imagen 37" src="Blog_archivos/image035.jpg"></p>
+
+        <p><img border=0 width=591 height=467
+        id="Imagen 35" src="Blog_archivos/image036.jpg"></p>
+
+        <p><img border=0 width=588 height=218
+        id="Imagen 38" src="Blog_archivos/image037.jpg"></p>
+
+        <p>php artisan migrate:refresh --seed</p>
+
+        <p><img border=0 width=545 height=598
+        id="Imagen 39" src="Blog_archivos/image038.jpg"></p>
+
+
+        <p><img border=0 width=783 height=266
+        id="Imagen 33" src="Blog_archivos/image039.jpg"></p>
+        <p>
+        Se termina los métodos y relaciones faltantes. </p>
+
+        <p ><img border=0 width=543
+        height=492 id="Imagen 40" src="Blog_archivos/image040.png"></p>
+          
+         <p ><img border=0 width=543
+        height=492  src="Blog_archivos/image041.jpg"></p>  
+
+
+        <p>
+        <img border=0 width=556 height=401 id="Imagen 42"
+        src="Blog_archivos/image042.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=491 id="Imagen 43"
+        src="Blog_archivos/image043.jpg"></p>
+
+        <p>
+        <img border=0 width=395 height=459 id="Imagen 44"
+        src="Blog_archivos/image044.jpg"></p>
+
+       
+        <h3><a name="seis"></a>6 - Listado de POST - Paginate, AUTH</h3>
+
+        <p>
+        Crear el sistema de login</p>
+
+        <p>
+        <img border=0 width=217 height=187 id="Imagen 45"
+        src="Blog_archivos/image045.jpg"></p>
+
+        <p>
+        <a href="https://laravel.com/docs/7.x/authentication">https://laravel.com/docs/7.x/authentication</a></p>
+
+        <p>
+        <img border=0 width=589 height=417 id="Imagen 46"
+        src="Blog_archivos/image046.jpg"></p>
+
+        <p>composer require laravel/ui</p>
+
+        <p>
+        <img border=0 width=588 height=300 id="Imagen 47"
+        src="Blog_archivos/image047.jpg"></p>
+
+        <p>php artisan ui vue --auth</p>
+        <p>
+        <img border=0 width=589 height=268 id="Imagen 48"
+        src="Blog_archivos/image048.jpg"></p>
+
+
+        <p>
+        <img border=0 width=501 height=391 id="Imagen 49"
+        src="Blog_archivos/image049.jpg"></p>
+
+        <p>npm i</p>
+
+        <p>
+        <img border=0 width=585 height=221 id="Imagen 50"
+        src="Blog_archivos/image050.jpg"></p>
+          
+        <p>npm run dev</p>
+          
+        <p>
+        <img border=0 width=589 height=158 id="Imagen 51"
+        src="Blog_archivos/image051.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=397 id="Imagen 53"
+        src="Blog_archivos/image052.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=397 id="Imagen 54"
+        src="Blog_archivos/image053.jpg"></p>
+
+
+        <p>
+        <img border=0 width=589 height=397 id="Imagen 55"
+        src="Blog_archivos/image054.jpg"></p>
+
+
+        <p>
+        <img border=0 width=589 height=419 id="Imagen 56"
+        src="Blog_archivos/image055.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=397 id="Imagen 57"
+        src="Blog_archivos/image056.jpg"></p>
+
+
+        <p>php artisan make:controller Web/PageController</p>
+
+        <p>
+        <img border=0 width=590 height=335 id="Imagen 58"
+        src="Blog_archivos/image057.jpg"></p>
+
+
+        <p>
+        <img border=0 width=589 height=397 id="Imagen 59"
+        src="Blog_archivos/image058.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=589 height=397 id="Imagen 60"
+        src="Blog_archivos/image059.jpg"></p>
+
+        <p>
+        <img border=0 width=562 height=382 id="Imagen 62"
+        src="Blog_archivos/image060.png"></p>
+
+        <p>
+        <img border=0 width=566 height=259 id="Imagen 61"
+        src="Blog_archivos/image061.png"></p>
+
+
+
+        <p>
+        <img border=0 width=570 height=385 id="Imagen 63"
+        src="Blog_archivos/image062.jpg"></p>
+
+
+        <p>
+        <img border=0 width=588 height=233 id="Imagen 64"
+        src="Blog_archivos/image063.jpg"></p>
+
+
+        <p>
+        <a
+        href="https://getbootstrap.com/docs/4.5/getting-started/introduction/">https://getbootstrap.com/docs/4.5/getting-started/introduction/</a></p>
+
+        <p>
+        <a href="https://getbootstrap.com/docs/4.5/components/card/">https://getbootstrap.com/docs/4.5/components/card/</a></p>
+
+        <p>
+        <img border=0 width=586 height=288 id="Imagen 65"
+        src="Blog_archivos/image064.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=480 id="Imagen 66"
+        src="Blog_archivos/image065.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=589 height=480 id="Imagen 67"
+        src="Blog_archivos/image066.jpg"></p>
+
+        <h3><a name="siete"></a>7 - Detalle de un POST</h3>
+
+        <p>
+        <img border=0 width=667 height=283 id="Imagen 52"
+        src="Blog_archivos/image067.jpg"></p>
+
+        <p>
+        <img border=0 width=645 height=440 id="Imagen 68"
+        src="Blog_archivos/image068.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=637 height=270 id="Imagen 70"
+        src="Blog_archivos/image069.jpg"></p>
+
+        <p>
+        <img border=0 width=641 height=438 id="Imagen 71"
+        src="Blog_archivos/image070.jpg"></p>
+
+        <p>
+        <img border=0 width=644 height=273 id="Imagen 72"
+        src="Blog_archivos/image071.jpg"></p>
+
+        <p>
+        <img border=0 width=635 height=434 id="Imagen 73"
+        src="Blog_archivos/image072.jpg"></p>
+
+        
+        <p>
+        <img border=0 width=624 height=399 id="Imagen 74"
+        src="Blog_archivos/image073.jpg"></p>
+
+        
+        <p>
+        <img border=0 width=615 height=339 id="Imagen 75"
+        src="Blog_archivos/image074.jpg"></p>
+        
+    
+        <p>
+        <img border=0 width=614 height=489 id="Imagen 76"
+        src="Blog_archivos/image075.jpg"></p>
+        
+        <h3><a name="ocho"></a> 8- ORM Eloquent (Consulta de POST por Categoría y Etiquetas)</h3>
+    
+        <p>
+        <img border=0 width=621 height=284 id="Imagen 77"
+        src="Blog_archivos/image076.jpg"></p>
+
+
+        <p>
+        <img border=0 width=615 height=377 id="Imagen 78"
+        src="Blog_archivos/image077.jpg"></p>
+
+        <p>
+        <img border=0 width=618 height=436 id="Imagen 79"
+        src="Blog_archivos/image078.jpg"></p>
+
+        <p>
+        <img border=0 width=624 height=394 id="Imagen 80"
+        src="Blog_archivos/image079.jpg"></p>
+
+
+        <p>
+        <img border=0 width=623 height=393 id="Imagen 81"
+        src="Blog_archivos/image080.jpg"></p>
+
+
+        <h3><a name="nueve"></a>9 - Estructura de Panel administrativo</h3>
+
+
+        <p>
+        <img border=0 width=591 height=239 id="Imagen 82"
+        src="Blog_archivos/image081.png"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=583 height=208 id="Imagen 83"
+        src="Blog_archivos/image082.jpg"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=589 height=182 id="Imagen 84"
+        src="Blog_archivos/image083.jpg"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=589 height=342 id="Imagen 85"
+        src="Blog_archivos/image084.jpg"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=590 height=207 id="Imagen 88"
+        src="Blog_archivos/image085.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=342 id="Imagen 87"
+        src="Blog_archivos/image086.jpg"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=590 height=263 id="Imagen 89"
+        src="Blog_archivos/image087.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=342 id="Imagen 90"
+        src="Blog_archivos/image088.jpg"></p>
+
+
+        <p>
+        <img border=0 width=590 height=263 id="Imagen 91"
+        src="Blog_archivos/image089.jpg"></p>
+        
+
+        <p>
+        <img border=0 width=589 height=342 id="Imagen 92"
+        src="Blog_archivos/image090.jpg"></p>
+
+        
+        <p>
+        <img border=0 width=586 height=259 id="Imagen 94"
+        src="Blog_archivos/image091.jpg"></p>
+
+        
+        
+
+        <p>
+        <img border=0 width=590 height=264 id="Imagen 95"
+        src="Blog_archivos/image092.jpg"></p>
+
+        <p>
+        <img border=0 width=590 height=241 id="Imagen 96"
+        src="Blog_archivos/image093.jpg"></p>
+
+        <p>
+        <img border=0 width=557 height=329 id="Imagen 98"
+        src="Blog_archivos/image094.jpg"></p>
+
+        <h3><a name="diez"></a> 10 - AUTH y TagController (index, show, create, store, edit, update y destroy)</h3>
+
+        <p>
+        Configurando el controlador y colocando seguridad para que
+        solicite inicio se sesión</p>
+
+        <p>
+        <img border=0 width=588 height=415 id="Imagen 69"
+        src="Blog_archivos/image095.jpg"></p>
+
+
+        <p>
+        <img border=0 width=589 height=328 id="Imagen 86"
+        src="Blog_archivos/image096.jpg"></p>
+
+
+        <p>
+        <img border=0 width=590 height=457 id="Imagen 93"
+        src="Blog_archivos/image097.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=586 height=182 id="Imagen 97"
+        src="Blog_archivos/image098.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=89 id="Imagen 99"
+        src="Blog_archivos/image099.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=566 height=298 id="Imagen 100"
+        src="Blog_archivos/image100.png"></p>
+
+
+        <p>
+        <img border=0 width=563 height=267 id="Imagen 101"
+        src="Blog_archivos/image101.png"></p>
+
+
+
+        <p>
+        <img border=0 width=586 height=403 id="Imagen 102"
+        src="Blog_archivos/image102.png"></p>
+
+        <p>
+        &nbsp;</p>
+
+        <p>
+        <img border=0 width=586 height=269 id="Imagen 103"
+        src="Blog_archivos/image103.jpg"></p>
+
+
+
+        <h3><a name="once"></a>11 - Validar campos obligatorios y únicos en Laravel (make:request)</h3>
+
+        <p>
+        Se crean dos validaciones colocando en el nombre tag que es el módulo, store el método y request como clase para recordar que tiene que ver con las validaciones.</p>
+
+        <p>
+        <img border=0 width=547 height=106 id="Imagen 104"
+        src="Blog_archivos/image104.png"></p>
+
+        <p>
+        <img border=0 width=229 height=75 id="Imagen 105"
+        src="Blog_archivos/image105.png"></p>
+
+
+        <p>
+        <img border=0 width=473 height=245 id="Imagen 106"
+        src="Blog_archivos/image107.png"></p>
+
+
+        <p>
+        <br clear=all>
+        <img border=0 width=493 height=146 id="Imagen 109"
+        src="Blog_archivos/image108.jpg"></p>
+
+        <p>
+        <img border=0 width=363 height=400 id="Imagen 110"
+        src="Blog_archivos/image109.jpg"></p>
+
+        <p>
+        <img border=0 width=369 height=394 id="Imagen 111"
+        src="Blog_archivos/image110.jpg"></p>
+
+        <p>
+        php artisan route:list</p>
+
+        <p>
+        <img border=0 width=589 height=376 id="Imagen 112"
+        src="Blog_archivos/image111.jpg"></p>
+
+        <h3><a name="doce"></a>12 - Vista Index (ver, editar, eliminar y crear)</h3>
+
+        <p>
+        <img border=0 width=588 height=374 id="Imagen 114"
+        src="Blog_archivos/image112.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=315 id="Imagen 115"
+        src="Blog_archivos/image113.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=370 id="Imagen 116"
+        src="Blog_archivos/image114.jpg"></p>
+
+
+        <p>
+        <img border=0 width=589 height=370 id="Imagen 117"
+        src="Blog_archivos/image115.jpg"></p>
+
+
+        <h3><a name="trece"></a>13 - Eliminar etiquetas</h3>
+
+
+        <p>
+        <a href="https://laravelcollective.com/">https://laravelcollective.com/</a><span
+        style='color:red'> NO INSTALAR</p>
+
+        <p>
+        <img border=0 width=295 height=283 id="Imagen 118"
+        src="Blog_archivos/image116.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=301 height=289 id="Imagen 119"
+        src="Blog_archivos/image117.jpg"></p>
+
+        <p>
+        <img border=0 width=225 height=216 id="Imagen 120"
+        src="Blog_archivos/image118.jpg"></p>
+
+        <p>
+        <img border=0 width=304 height=292 id="Imagen 121"
+        src="Blog_archivos/image119.jpg"></p>
+
+        <p>$ composer require laravelcollective/html</p><br><p>NO INSTALAR</p>
+
+        <p>
+        <img border=0 width=354 height=200 id="Imagen 122"
+        src="Blog_archivos/image120.jpg"></p>
+
+        <p>
+        <img border=0 width=262 height=176 id="Imagen 123"
+        src="Blog_archivos/image121.jpg"></p>
+
+        <p>composer remove laravelcollective/html</p>
+
+        <p ><img border=0 width=268
+        height=264 id="Imagen 113" src="Blog_archivos/image122.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=223 id="Imagen 124"
+        src="Blog_archivos/image123.jpg"></p>
+
+      
+        <p>
+        <img border=0 width=404 height=294 id="Imagen 125"
+        src="Blog_archivos/image124.jpg"></p>
+
+        <p> <img border=0 width=417 height=304 id="Imagen 126" src="Blog_archivos/image125.jpg"></p>
+
+        <p>
+        <img border=0 width=424 height=238 id="Imagen 128"
+        src="Blog_archivos/image126.jpg"></p>
+
+        <p>
+        <img border=0 width=391 height=285 id="Imagen 127"
+        src="Blog_archivos/image127.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=234 id="Imagen 129"
+        src="Blog_archivos/image128.jpg"></p>
+
+        
+        font-family:https://getbootstrap.com/docs/4.5/components/alerts/</u></p>
+
+        <p>
+        <img border=0 width=589 height=379 id="Imagen 130"
+        src="Blog_archivos/image129.jpg"></p>
+
+        <p> <img border=0 width=589 height=292 id="Imagen 131" src="Blog_archivos/image130.jpg"></p>
+
+       <h3><a name="catorce"></a>14 - Vistas de create, edit, show para el módulo tags</h3>
+
+        <p>
+        <img border=0 width=589 height=369 id="Imagen 108"
+        src="Blog_archivos/image131.jpg"></p>
+
+        <p>
+        <img border=0 width=585 height=327 id="Imagen 132"
+        src="Blog_archivos/image132.jpg"></p>
+
+      
+        <p>
+        <img border=0 width=503 height=455 id="Imagen 133"
+        src="Blog_archivos/image133.jpg"></p>
+
+        <p>
+        <img border=0 width=511 height=446 id="Imagen 134"
+        src="Blog_archivos/image134.jpg"></p>
+
+        <p>
+        <img border=0 width=467 height=401 id="Imagen 146"
+        src="Blog_archivos/image135.jpg"></p>
+
+    
+         <h3><a name="quince"></a>15 - Javascript en algunas vistas blade</h3>
+
+        <p>
+        <img border=0 width=167 height=157 id="Imagen 136"
+        src="Blog_archivos/image136.png"></p>
+
+
+        <p>
+        <img border=0 width=586 height=221 id="Imagen 137"
+        src="Blog_archivos/image137.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=347 id="Imagen 138"
+        src="Blog_archivos/image138.jpg"></p>
+
+
+        <p>
+        <img border=0 width=588 height=231 id="Imagen 139"
+        src="Blog_archivos/image139.jpg"></p>
+
+
+
+        <p>
+        <img border=0 width=588 height=233 id="Imagen 140"
+        src="Blog_archivos/image140.jpg"></p>
+
+        <p>
+        <img border=0 width=586 height=259 id="Imagen 141"
+        src="Blog_archivos/image141.jpg"></p>
+
+
+        <p>
+        <img border=0 width=586 height=259 id="Imagen 142"
+        src="Blog_archivos/image142.jpg"></p>
+
+
+        <p>
+        <img border=0 width=588 height=353 id="Imagen 143"
+        src="Blog_archivos/image143.jpg"></p>
+
+        <p>
+        <img border=0 width=585 height=211 id="Imagen 144"
+        src="Blog_archivos/image144.jpg"></p>
+
+       <h3><a name="dieciseis"></a>16 - Módulo categorías (CRUD)</h3>
+
+        <p>
+        <img border=0 width=589 height=247 id="Imagen 147"
+        src="Blog_archivos/image145.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=247 id="Imagen 148"
+        src="Blog_archivos/image146.jpg"></p>
+
+
+        <p>
+        <img border=0 width=477 height=396 id="Imagen 149"
+        src="Blog_archivos/image147.jpg"></p>
+
+        <p>
+        <img border=0 width=476 height=437 id="Imagen 150"
+        src="Blog_archivos/image148.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 151"
+        src="Blog_archivos/image149.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 152"
+        src="Blog_archivos/image150.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 153"
+        src="Blog_archivos/image151.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 154"
+        src="Blog_archivos/image152.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 155"
+        src="Blog_archivos/image153.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 156"
+        src="Blog_archivos/image154.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 157"
+        src="Blog_archivos/image155.jpg"></p>
+
+        <p ><img border=0 width=586
+        height=326 id="Imagen 158" src="Blog_archivos/image156.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=252 id="Imagen 159"
+        src="Blog_archivos/image157.jpg"></p>
+
+        <p>
+        <img border=0 width=588 height=271 id="Imagen 160"
+        src="Blog_archivos/image158.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=282 id="Imagen 161"
+        src="Blog_archivos/image159.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=198 id="Imagen 162"
+        src="Blog_archivos/image160.jpg"></p>
+
+        <p>
+        17 - Módulo de Entradas (CRUD de POSTS)</p>
+
+        <p>
+        <img border=0 width=589 height=247 id="Imagen 163"
+        src="Blog_archivos/image161.jpg"></p>
+
+        <p>
+        <img border=0 width=589 height=332 id="Imagen 164"
+        src="Blog_archivos/image162.jpg"></p>
+
+        <p><img border=0 width=589 height=271 id="Imagen 165"
+        src="Blog_archivos/image163.jpg"></p>
+
+          
+        <hr>
+
+
+      </div>
+
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">https://startbootstrap.com/templates/blog-post/</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
