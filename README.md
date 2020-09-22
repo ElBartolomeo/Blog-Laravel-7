@@ -1,5 +1,5 @@
-# Blog-Laravel-7
-Proyecto Blog Laravel
+# Blog Laravel 7
+Proyecto Blog
 ## Información sobre este blog
 
 La información presente es este sitio tiene como fin de documentar mi primera practica usando Laravel, no soy un programador, tampoco estudio maquetación web y esto no es una guía para crear un blog, solo recopilo los pasos que he hecho y adjunto documentación que he encontrado en otros sitios.</p>
