@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
     @yield('scripts')
 
     <!-- Fonts -->
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
