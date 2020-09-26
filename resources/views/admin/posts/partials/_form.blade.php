@@ -64,16 +64,41 @@
             <!--body-->
             <div class="form-group">
                 <label>Contenido de esta entrada</label>
-                <input type="textarea"  class="form-control" name="body" id ='body'  value="{{ old('body', $post->body)}}">
+                <textarea name="body" id ='body'>{{ old('body', $post->body)}}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">{{$btnText}}</button>
         
             @section('scripts')
+
+            <!-- stringToSlug -->
             <script src="{{ asset('vendor/stringToSlug/jquery.stringToSlug.min.js') }}"></script>
+
+            <!-- Editor de texto Summernote -->
+            <script src="{{ asset('vendor/summernote/summernote-lite.min.js') }}"></script>
+
+            <!-- Idioma Summernote-es-ES -->
+            <script src="{{ asset('vendor/summernote/lang/summernote-es-ES.min.js') }}"></script>
+
             <script>
+                // stringToSlug
                 $(document).ready( function() {
                     $("#name").stringToSlug();
                 });
             </script>
+            <script>
+                $('#body').summernote({
+                    lang: 'es-ES', // default: 'en-US'  
+                    placeholder: 'Aquí puedes escribir el texto de la entrada que quieres compartir',
+                    tabsize: 2,
+                    height: 400,
+                    toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic','underline', 'clear']],
+                    ['insert', ['link']],
+                    ['view', ['codeview', 'help']]
+                    ]
+                });
+            </script>
+
             @endsection

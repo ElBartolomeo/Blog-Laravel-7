@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('MyStyles')
+<link href="{{ asset('vendor/summernote/summernote-lite.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="card">
