@@ -6,7 +6,7 @@
             @foreach($posts as $post)
                 <div class="card mb-3">
                     @if($post->file)
-                        <img src="{{$post->file}}" class="img-responsive card-img-top" alt="{{ $post->name }}">
+                        <img src="{{ asset('img/pictureArticle/'.$post->file) }}" alt="{{ $post->name }}">
                     @endif
                     <div class="card-body">
                         <h4 class="card-title">{{ $post->name }}</h4>

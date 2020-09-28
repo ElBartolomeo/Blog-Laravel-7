@@ -11,7 +11,7 @@
                     
                     <div class="card-body">
                         @if($post->file)
-                            <img src="{{$post->file}}" class="img-responsive card-img-top" alt="{{ $post->name }}">
+                            <img src="{{ asset('img/pictureArticle/'.$post->file) }}" class="img-responsive card-img-top" alt="{{ $post->name }}">
                         @endif
                         <p class="card-text">
                             {{ $post->excerpt }}
