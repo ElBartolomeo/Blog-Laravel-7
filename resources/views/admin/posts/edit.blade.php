@@ -15,10 +15,9 @@
         </div>
     </div>
     <div class="card-body">
-        <form method="POST" action ="{{route('posts.update', $post->id)}}">
+        <form method="POST" action ="{{route('posts.update', $post->id)}}" enctype="multipart/form-data">
         @method('PATCH')
-        @include('admin.posts.partials._form',['btnText'=>'Actualizar'])
-        
+        @include('admin.posts.partials._form',['btnText'=>'Actualizar'])      
         </form>
     </div>
 

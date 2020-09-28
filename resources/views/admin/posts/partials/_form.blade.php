@@ -52,7 +52,7 @@
              <!--file-->
             <div class="form-group">
                 <label>Imagen</label>
-                <input type="file" name="file" class="form-control-file" value="{{'file'}}">
+                <input type="file" name="file_up" class="form-control-file" value="{{'file'}}" accept="image/*"/>
             </div>
     
             <!--excerpt-->

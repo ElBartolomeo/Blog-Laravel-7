@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="card-body">
-        <form method="POST" action ="{{route('posts.store')}}">
+        <form method="POST" action ="{{route('posts.store')}}" enctype="multipart/form-data">
         
         @include('admin.posts.partials._form',['btnText'=>'Guardar'])
 
