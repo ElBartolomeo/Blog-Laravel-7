@@ -1,10 +1,32 @@
              @csrf
 
             <!--user_id Está en PostController dentro de store como $user_id = auth()->user()->id;-->
-           
+
+            <!--status-->
+            <div class="form-group">
+            <label>Estado de la entrada: </label><br>
+            @php
+                $statusPost = $post->status;
+            @endphp
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="status" value="{{'PUBLISHED'}}" class="custom-control-input"
+                    @if ($statusPost === 'PUBLISHED')
+                        checked
+                    @endif>
+                <label class="custom-control-label" for="customRadioInline1">Publicado</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="status" value="{{'DRAFT'}}" class="custom-control-input"
+                    @if ($statusPost === 'DRAFT')
+                        checked
+                    @endif>
+                <label class="custom-control-label" for="customRadioInline2">Borrador</label>
+            </div>
+            </div>
+
             <!--name-->
             <div class="form-group">
-                <label>Nombre de la Entrada</label>
+                <label>Nombre de la entrada</label>
                 <input type="text" name="name" class="form-control" id = "name"  value="{{ old('name', $post->name)}}">
             </div>
 
@@ -28,26 +50,20 @@
 
             <!--Tags-->
             <div class="form-group">
-                <label>Escoge las etiquetas de esta entrada</label><br>
-                    @foreach($tags as $tag)
-                    <div  class="form-check form-check-inline">
-                    <input class="form-check-input" name = "tags[]" type="checkbox"  value="{{ $tag->id }}">
-                    <label class="form-check-label" >{{ $tag->name }}</label>
-                    </div>
-                    @endforeach 
+                <label for="exampleFormControlSelect2">Escoge las etiquetas de esta entrada</label>
+                <select multiple class="form-control" name="tags[]">
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}"
+                          @foreach ($post->tags as $postTag)
+                            @if ($postTag->id == $tag->id)
+                              selected
+                            @endif
+                          @endforeach
+                        >{{ $tag->name }}</option>
+                    @endforeach
+                </select>
             </div>
-            <!--status-->
-            <div class="form-group">
-            <label>Estado de la entrada: </label><br>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="status" id="status" value="{{'DRAFT'}}" checked> Borrador
-                </label>
-                <label class="btn btn-success">
-                    <input type="radio"name="status" id="status" value="{{'PUBLISHED'}}"> Publicado
-                </label>
-                </div>
-            </div> 
+
 
              <!--file-->
             <div class="form-group">

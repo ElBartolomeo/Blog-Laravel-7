@@ -33,7 +33,7 @@ class PostStoreRequest extends FormRequest
         ];
 
         if($this->get('file'))   //Adiciona el campo file al array siempre y cuando se envie algo desde el formulario. Si no, no adiciona nada.      
-            $rules = array_merge($rules, ['file'=> 'mimes:jpg,png']);
+            $rules = array_merge($rules, ['file'=> 'mimes:jpg,png,svg']);
 
         return $rules;
     }

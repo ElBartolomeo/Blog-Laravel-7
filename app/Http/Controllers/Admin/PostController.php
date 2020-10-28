@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Facades\Storage;
 
 use App\Post;
 use App\Category;
@@ -29,8 +28,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id','DESC')
-        ->where('user_id', auth()->user()->id) // Permite mostrar los post que le pertenecen a cada usuario y verlo desde el index que los muestra.
-        
+        //->where('user_id', auth()->user()->id)  //Permite mostrar los post que le pertenecen a cada usuario y verlo desde el index que los muestra.
         ->paginate();
         //dd($posts);
         return view('admin.posts.index', compact('posts')); // El array se puede escribir tambien como ['posts'=>'$posts']
@@ -59,15 +57,43 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {   
+        
         $user_id = auth()->user()->id;
         $request->request->add(['user_id' => $user_id]);
+        
+        //Imagen
+        //Gestiona la imagen subida
+        if($request->hasFile('file_up'))
+        {
+            // Se busca el nombre del archivo junto con la extensión que se envio desde el formulario.
+            $filenameWithExt = $request->file('file_up')->getClientOriginalName();
+            // Se obtine solo el nombre del archivo
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Se obtine solo la extensión del archivo
+            $extension = $request->file('file_up')->getClientOriginalExtension();
+            // Se crea el nombre para guardarlo
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Sube y guarda la imagen
+            $path = $request->file('file_up')->storeAs('public/img/pictureArticle', $fileNameToStore);
+        } else
+        {
+            // Si no se sube imagen coloca pone este nombre.
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        //Se adjunta al request el campo file con el nombre que hemos creado.
+        $request-> request->add(['file'=>$fileNameToStore]);
 
         //Salva los datos
         $post = Post::create($request->all());//Acepta datos masivos, pero en post hay control de los campos que se necesitan
+        
+        //Tags
         $post->tags()->attach($request->get('tags')); 
+
         return redirect()->route('posts.edit', $post->id)->with('info','Entrada Creada con éxito');
+        
         /**
-        *return request();
+        *dd($request->all());
         *return $user_id; 
         *dd(auth()->user());    
         *dd($user_id);
@@ -98,7 +124,6 @@ class PostController extends Controller
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
         $tags       = Tag::orderBy('name','ASC')->get();
         $post       = Post::find($id);
-        
         return view('admin.posts.edit', compact('post','categories','tags'));
         
     }
@@ -112,16 +137,45 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, $id)
    
-    {  /*
-        dd();*/
+    {  
+        
+        /*dd();
+        return $request->all();*/
 
         $post = Post::find($id);
-        
+
+        //Imagen
+        //Gestiona la imagen de la entrada si se quiere actualizar
+        if($request->hasFile('file_up'))
+        {
+            // Elimina la anterior imagen de la entrada
+            Storage::delete('public/img/pictureArticle/'.$post->file);
+            // Se busca el nombre del archivo junto con la extensión que se envio desde el formulario. 
+            $filenameWithExt = $request->file('file_up')->getClientOriginalName();
+            // Se obtine solo el nombre del archivo
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Se obtine solo la extensión del archivo
+            $extension = $request->file('file_up')->getClientOriginalExtension();
+            // Crea el nombre para guardarlo
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Sube y guarda la imagen nueva
+            $path = $request->file('file_up')->storeAs('public/img/pictureArticle', $fileNameToStore);
+        } else
+        {
+            // Si no se sube imagen mantiene el nombre de la anterior imagen.
+            $fileNameToStore = $post->file;
+        }
+
+        //Se adjunta al request el campo file con el nombre que hemos creado.
+        $request-> request->add(['file'=>$fileNameToStore]);
+
+        //Salva los datos
         $post->fill($request->all())->save();
 
+        //Sincroniza las etiquetas de la entrada Tags
+        $post->tags()->sync($request->get('tags'));
         return redirect()->route('posts.edit', $post->id)
         ->with('info','Entrada actualizada con éxito');
-        
     }
 
     /**
@@ -132,7 +186,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id)->delete();
+        $post = Post::find($id);
+        //Borra la imgen que tiene una Entrada
+        if($post->file != 'noimage.jpg')
+            {
+            Storage::delete('public/img/pictureArticle/'.$post->file);
+            }
+
+        $post->delete();
         return back()->with('info','Eliminado correctamente');
     }
 }
