@@ -8,7 +8,7 @@ class Post extends Model
 {
     //Permite salvar datos de forma masiva, 
     protected $fillable = [
-        'user_id','category_id','name','slug','excerpt','body','status','file'
+        'user_id','category_id','name','slug','excerpt','body','status','file','image'
     ];
 
     //Se termina de dar de alta los métodos y relaciones faltantes. 

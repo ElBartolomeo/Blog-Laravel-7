@@ -31,10 +31,12 @@ class PostStoreRequest extends FormRequest
             'body'          => 'required',
             'status'        => 'required|in:DRAFT,PUBLISHED',            
         ];
-
+        
         if($this->get('file'))   //Adiciona el campo file al array siempre y cuando se envie algo desde el formulario. Si no, no adiciona nada.      
             $rules = array_merge($rules, ['file'=> 'mimes:jpg,png,svg']);
-
+        
+        if($this->get('image'))   //Adiciona el campo image al array siempre y cuando se envie algo desde el formulario. Si no, no adiciona nada.      
+            $rules = array_merge($rules, ['image'=> 'mimes:jpg,png,svg']); 
         return $rules;
     }
 }

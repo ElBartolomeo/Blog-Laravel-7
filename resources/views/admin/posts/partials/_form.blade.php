@@ -65,10 +65,30 @@
             </div>
 
 
-             <!--file-->
+            <!--file-->
             <div class="form-group">
-                <label>Imagen</label>
+                <label>Imagen Uno</label>
                 <input type="file" name="file_up" class="form-control-file" value="{{'file'}}" accept="image/*"/>
+                @if($post->file)
+                    <div class="d-flex justify-content-center">
+                        <div class="col-sm-6">
+                        <img class="img-thumbnail img-fluid" width="50%" height="50%" src="{{ asset('storage/img/pictureArticle/'.$post->file) }}" alt="{{ $post->name }}">
+                        </div>
+                    </div>
+                @endif 
+            </div>
+            <hr>
+            <!--image-->
+            <div class="form-group">
+                <label>Imagen Dos</label>
+                <input type="file" name="image_up" class="form-control-file" value="{{'image'}}" accept="image/*"/>
+                @if($post->file)
+                    <div class="d-flex justify-content-center">
+                        <div class="col-sm-6">
+                        <img class="img-thumbnail img-fluid" width="50%" height="50%" src="{{ asset('storage/img/pictureArticleTwo/'.$post->image) }}" alt="{{ $post->name }}">
+                        </div>
+                    </div>
+                @endif 
             </div>
     
             <!--excerpt-->

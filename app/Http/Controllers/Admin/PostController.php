@@ -81,8 +81,29 @@ class PostController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
-        //Se adjunta al request el campo file con el nombre que hemos creado.
+        //Imagen
+        //Gestiona la segunda imagen subida
+        if($request->hasFile('image_up'))
+        {
+            // Se busca el nombre del archivo junto con la extensión que se envio desde el formulario.
+            $imagenameWithExt = $request->image('image_up')->getClientOriginalName();
+            // Se obtine solo el nombre del archivo
+            $imagename = pathinfo($imagenameWithExt, PATHINFO_FILENAME);
+            // Se obtine solo la extensión del archivo
+            $extension = $request->image('image_up')->getClientOriginalExtension();
+            // Se crea el nombre para guardarlo
+            $imageNameToStore = $imagename.'_'.time().'.'.$extension;
+            // Sube y guarda la imagen
+            $path = $request->image('image_up')->storeAs('public/img/pictureArticleTwo', $imageNameToStore);
+        } else
+        {
+            // Si no se sube imagen coloca pone este nombre.
+            $imageNameToStore = 'noimage.jpg';
+        }
+
+        //Se adjunta al request el campo file y image con el nombre que hemos creado.
         $request-> request->add(['file'=>$fileNameToStore]);
+        $request-> request->add(['image'=>$imageNameToStore]);
 
         //Salva los datos
         $post = Post::create($request->all());//Acepta datos masivos, pero en post hay control de los campos que se necesitan
