@@ -60,8 +60,8 @@ class PostController extends Controller
         
         $user_id = auth()->user()->id;
         $request->request->add(['user_id' => $user_id]);
-        
-        //Imagen
+    
+        //file
         //Gestiona la imagen subida
         if($request->hasFile('file_up'))
         {
@@ -81,20 +81,20 @@ class PostController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
-        //Imagen
+        //image
         //Gestiona la segunda imagen subida
         if($request->hasFile('image_up'))
         {
             // Se busca el nombre del archivo junto con la extensión que se envio desde el formulario.
-            $imagenameWithExt = $request->image('image_up')->getClientOriginalName();
+            $imagenameWithExt = $request->file('image_up')->getClientOriginalName();
             // Se obtine solo el nombre del archivo
             $imagename = pathinfo($imagenameWithExt, PATHINFO_FILENAME);
             // Se obtine solo la extensión del archivo
-            $extension = $request->image('image_up')->getClientOriginalExtension();
+            $extension = $request->file('image_up')->getClientOriginalExtension();
             // Se crea el nombre para guardarlo
             $imageNameToStore = $imagename.'_'.time().'.'.$extension;
             // Sube y guarda la imagen
-            $path = $request->image('image_up')->storeAs('public/img/pictureArticleTwo', $imageNameToStore);
+            $path = $request->file('image_up')->storeAs('public/img/pictureArticleTwo', $imageNameToStore);
         } else
         {
             // Si no se sube imagen coloca pone este nombre.
@@ -187,8 +187,31 @@ class PostController extends Controller
             $fileNameToStore = $post->file;
         }
 
+        //image
+        //Gestiona la segunda imagen de la entrada si se quiere actualizar
+        if($request->hasFile('image_up'))
+        {
+            // Elimina la anterior imagen de la entrada
+            Storage::delete('public/img/pictureArticleTwo/'.$post->image);
+            // Se busca el nombre del archivo junto con la extensión que se envio desde el formulario. 
+            $imagenameWithExt = $request->file('image_up')->getClientOriginalName();
+            // Se obtine solo el nombre del archivo
+            $imagename = pathinfo($imagenameWithExt, PATHINFO_FILENAME);
+            // Se obtine solo la extensión del archivo
+            $extension = $request->file('image_up')->getClientOriginalExtension();
+            // Crea el nombre para guardarlo
+            $imageNameToStore = $imagename.'_'.time().'.'.$extension;
+            // Sube y guarda la imagen nueva
+            $path = $request->file('image_up')->storeAs('public/img/pictureArticleTwo', $imageNameToStore);
+        } else
+        {
+            // Si no se sube imagen mantiene el nombre de la anterior imagen.
+            $imageNameToStore = $post->image;
+        }
+
         //Se adjunta al request el campo file con el nombre que hemos creado.
         $request-> request->add(['file'=>$fileNameToStore]);
+        $request-> request->add(['image'=>$imageNameToStore]);
 
         //Salva los datos
         $post->fill($request->all())->save();
@@ -212,7 +235,11 @@ class PostController extends Controller
         if($post->file != 'noimage.jpg')
             {
             Storage::delete('public/img/pictureArticle/'.$post->file);
-            }
+            };
+        if($post->image != 'noimage.jpg')
+            {
+            Storage::delete('public/img/pictureArticleTwo/'.$post->image);
+            };
 
         $post->delete();
         return back()->with('info','Eliminado correctamente');

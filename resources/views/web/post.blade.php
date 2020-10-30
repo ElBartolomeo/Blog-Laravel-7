@@ -4,6 +4,7 @@
         <div class="col-md-12 col-md-offset-2">
             <h1>{{ $post->name }}</h1>
                 <div class="card mb-3">
+
                     <div class="card-header">
                          Categoría
                          <a href="{{ route('category', $post->category->slug)}}">{{ $post->category->name }}</a>
@@ -18,6 +19,10 @@
                         </p>
                         <hr>
                         {!! $post->body!!}
+                        <hr>
+                        @if($post->image)
+                            <img src="{{ asset('storage/img/pictureArticleTwo/'.$post->image) }}" class="img-thumbnail img-fluid" width="50%" height="50%" alt="{{ $post->name }}">
+                        @endif
                         <hr>
                         Etiquetas
                         @foreach($post->tags as $tag)
